@@ -2,16 +2,19 @@ let distance = 0
 OLED.init(128, 64)
 pins.servoWritePin(AnalogPin.P7, 0)
 control.waitMicros(2000000)
-let degrees = [0, 30, 60, 90, 120, 150, 180, 150, 120, 90, 60, 30]
+let degrees = [0, 45, 90, 135, 180, 135, 90, 45]
 basic.forever(function () {
-    for (let degree of degrees) {
-        pins.servoWritePin(AnalogPin.P7, degree)
+    for (let index = 0; index <= 7; index++) {
+        pins.servoWritePin(AnalogPin.P7, degrees[index])
         control.waitMicros(300000)
         distance = sonar.ping(
         DigitalPin.P4,
         DigitalPin.P9,
         PingUnit.Centimeters
         )
-        OLED.writeStringNewLine("" + convertToText(degree) + ": " + convertToText(distance) + "cm    ")
+        OLED.clear()
+        OLED.writeNumNewLine(degrees[index])
+        OLED.writeNumNewLine(distance)
+        control.waitMicros(1000000)
     }
 })
