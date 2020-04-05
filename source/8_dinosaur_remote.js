@@ -1,30 +1,27 @@
 /**
- * Remote control
+ * Remote
  */
+input.onGesture(Gesture.ScreenUp, function () {
+    radio.sendString("S")
+    basic.showString("S")
+})
 input.onGesture(Gesture.LogoDown, function () {
-    command = "F"
+    radio.sendString("F")
+    basic.showString("F")
 })
 input.onGesture(Gesture.LogoUp, function () {
-    command = "B"
-})
-input.onGesture(Gesture.ScreenUp, function () {
-    command = "S"
+    radio.sendString("B")
+    basic.showString("B")
 })
 input.onGesture(Gesture.TiltLeft, function () {
-    command = "L"
+    radio.sendString("L")
+    basic.showString("L")
 })
 input.onGesture(Gesture.TiltRight, function () {
-    command = "R"
+    radio.sendString("R")
+    basic.showString("R")
 })
-let command = ""
 radio.setGroup(1)
-command = "S"
-let last_command = "S"
-basic.showString("" + command)
 basic.forever(function () {
-    if (command != last_command) {
-        last_command = command
-        basic.showString("" + command)
-        radio.sendString("" + command)
-    }
+	
 })
